@@ -15,39 +15,33 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:8100", "http://localhost:4200"})
 public class AccountController {
 
-    private final AccountAppService service;
+     private final AccountAppService service;
 
     public AccountController(AccountAppService service) {
         this.service = service;
     }
 
-    // Create account
-    @PostMapping
+    @PostMapping("/accounts")
     public ResponseEntity<AccountResponse> create(@Valid @RequestBody CreateAccountRequest req) {
         return ResponseEntity.ok(service.createAccount(req));
     }
 
-    // Get all accounts by customerId
-    @GetMapping
+    @GetMapping("/accounts")
     public ResponseEntity<List<AccountResponse>> byCustomer(@RequestParam Long customerId) {
         return ResponseEntity.ok(service.listByCustomer(customerId));
     }
 
-    // Get account by ID
-    @GetMapping("/{id}")
+    @GetMapping("/accounts/{id}")
     public ResponseEntity<AccountResponse> get(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
-
-    // Debit account
-    @PostMapping("/{id}/debit")
+    @PostMapping("/accounts/{id}/debit")
     public ResponseEntity<Void> debit(@PathVariable Long id, @Valid @RequestBody AmountRequest req) {
         service.debit(id, req.getAmount());
         return ResponseEntity.ok().build();
     }
 
-    // Credit account
-    @PostMapping("/{id}/credit")
+    @PostMapping("/accounts/{id}/credit")
     public ResponseEntity<Void> credit(@PathVariable Long id, @Valid @RequestBody AmountRequest req) {
         service.credit(id, req.getAmount());
         return ResponseEntity.ok().build();
