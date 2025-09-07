@@ -12,7 +12,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.banking</groupId>
+    <groupId>com.example</groupId>
     <artifactId>service-registry</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>service-registry</name>
